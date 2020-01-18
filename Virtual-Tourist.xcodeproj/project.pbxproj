@@ -14,6 +14,7 @@
 		D97F48E723D16831003F067C /* Virtual_Tourist.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D97F48E523D16831003F067C /* Virtual_Tourist.xcdatamodeld */; };
 		D97F48E923D16841003F067C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D97F48E823D16841003F067C /* Assets.xcassets */; };
 		D97F48EC23D16841003F067C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D97F48EA23D16841003F067C /* LaunchScreen.storyboard */; };
+		D97F48F723D16A68003F067C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D97F48F623D16A68003F067C /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		D97F48E823D16841003F067C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D97F48EB23D16841003F067C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D97F48ED23D16841003F067C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D97F48F623D16A68003F067C /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,14 +62,39 @@
 			children = (
 				D97F48DC23D16831003F067C /* AppDelegate.swift */,
 				D97F48DE23D16831003F067C /* SceneDelegate.swift */,
-				D97F48E023D16831003F067C /* ViewController.swift */,
-				D97F48E223D16831003F067C /* Main.storyboard */,
-				D97F48E823D16841003F067C /* Assets.xcassets */,
-				D97F48EA23D16841003F067C /* LaunchScreen.storyboard */,
+				D97F48F323D16852003F067C /* View Controllers */,
+				D97F48F423D16868003F067C /* Storyboards */,
+				D97F48F523D16874003F067C /* Assets */,
 				D97F48ED23D16841003F067C /* Info.plist */,
 				D97F48E523D16831003F067C /* Virtual_Tourist.xcdatamodeld */,
 			);
 			path = "Virtual-Tourist";
+			sourceTree = "<group>";
+		};
+		D97F48F323D16852003F067C /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D97F48E023D16831003F067C /* ViewController.swift */,
+				D97F48F623D16A68003F067C /* MapViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		D97F48F423D16868003F067C /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D97F48E223D16831003F067C /* Main.storyboard */,
+				D97F48EA23D16841003F067C /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		D97F48F523D16874003F067C /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				D97F48E823D16841003F067C /* Assets.xcassets */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,6 +171,7 @@
 				D97F48E723D16831003F067C /* Virtual_Tourist.xcdatamodeld in Sources */,
 				D97F48E123D16831003F067C /* ViewController.swift in Sources */,
 				D97F48DD23D16831003F067C /* AppDelegate.swift in Sources */,
+				D97F48F723D16A68003F067C /* MapViewController.swift in Sources */,
 				D97F48DF23D16831003F067C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

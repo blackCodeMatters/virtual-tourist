@@ -1,24 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="xoa-Gx-h7e">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="eDT-vD-tT5">
+                                <rect key="frame" x="0.0" y="88" width="414" height="742"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="sc5-UW-UPB" appends="YES" id="WMr-vW-0Bp"/>
+                                    <outletCollection property="gestureRecognizers" destination="lKx-WY-05w" appends="YES" id="JYN-yy-0Wh"/>
+                                </connections>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWc-0G-ns1">
+                                <rect key="frame" x="0.0" y="830" width="414" height="32"/>
+                                <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="7cE-ag-blI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal" title="Tap Pin to Delete">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="KWc-0G-ns1" firstAttribute="top" secondItem="eDT-vD-tT5" secondAttribute="bottom" id="E1E-Kf-nPK"/>
+                            <constraint firstItem="KWc-0G-ns1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="L8J-xU-hp6"/>
+                            <constraint firstItem="eDT-vD-tT5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Nl1-fS-Rkf"/>
+                            <constraint firstItem="eDT-vD-tT5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Sh4-ZN-AjW"/>
+                            <constraint firstItem="KWc-0G-ns1" firstAttribute="top" secondItem="eDT-vD-tT5" secondAttribute="bottom" id="fbs-KO-su3"/>
+                            <constraint firstItem="KWc-0G-ns1" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="m9t-tR-ArF"/>
+                            <constraint firstItem="KWc-0G-ns1" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="ss1-IK-PeG"/>
+                            <constraint firstItem="eDT-vD-tT5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="tfJ-yi-Yg6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="QYV-QK-4Ma">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="Yor-xS-Oiy">
+                            <connections>
+                                <action selector="navButtonPressed:" destination="BYZ-38-t0r" id="ssY-ux-D92"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="longPressGestureRecognizer" destination="lKx-WY-05w" id="zSG-NK-YQa"/>
+                        <outlet property="mapView" destination="eDT-vD-tT5" id="rfP-Pm-IwN"/>
+                        <outlet property="navButton" destination="Yor-xS-Oiy" id="QhV-G5-Dgf"/>
+                        <outlet property="pinDeleteButton" destination="KWc-0G-ns1" id="cRZ-00-1mL"/>
+                        <outlet property="pinDeleteButtonHeight" destination="7cE-ag-blI" id="hK0-VY-H8a"/>
+                        <outlet property="tapGestureRecognizer" destination="sc5-UW-UPB" id="8sV-SC-DuO"/>
+                        <segue destination="XRz-Xa-gqr" kind="presentation" identifier="pinPhotos" id="161-Me-tJ9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="sc5-UW-UPB"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="lKx-WY-05w"/>
             </objects>
+            <point key="canvasLocation" x="1116" y="138"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="80Z-FY-f5t">
+            <objects>
+                <viewController id="XRz-Xa-gqr" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="H5H-D5-H6r">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Ncb-kg-XbZ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MOd-xK-Tdy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2080" y="138"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="V2w-Np-IJq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xoa-Gx-h7e" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Edd-iM-glL">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="3NW-Tx-I7C"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mwg-zp-PzX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
         </scene>
     </scenes>
 </document>
