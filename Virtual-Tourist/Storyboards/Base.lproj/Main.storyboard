@@ -4,13 +4,14 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" id="BYZ-38-t0r" customClass="MapViewController" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -62,7 +63,7 @@
                         <outlet property="pinDeleteButton" destination="KWc-0G-ns1" id="cRZ-00-1mL"/>
                         <outlet property="pinDeleteButtonHeight" destination="7cE-ag-blI" id="hK0-VY-H8a"/>
                         <outlet property="tapGestureRecognizer" destination="sc5-UW-UPB" id="8sV-SC-DuO"/>
-                        <segue destination="XRz-Xa-gqr" kind="presentation" identifier="pinPhotos" id="161-Me-tJ9"/>
+                        <segue destination="XRz-Xa-gqr" kind="presentation" identifier="pinId" id="161-Me-tJ9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -71,20 +72,109 @@
             </objects>
             <point key="canvasLocation" x="1116" y="138"/>
         </scene>
-        <!--View Controller-->
+        <!--Flickr View Controller-->
         <scene sceneID="80Z-FY-f5t">
             <objects>
-                <viewController id="XRz-Xa-gqr" sceneMemberID="viewController">
+                <viewController id="XRz-Xa-gqr" customClass="FlickrViewController" customModule="Virtual_Tourist" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H5H-D5-H6r">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="yZq-k6-bvV">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="2bI-YT-s5C"/>
+                                </constraints>
+                            </mapView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="o7e-2A-boA">
+                                <rect key="frame" x="0.0" y="150" width="414" height="618"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BBG-MN-FlC">
+                                    <size key="itemSize" width="154" height="154"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <label key="backgroundView" hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Images" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nRD-NW-KER">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="618"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="27"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="reuseIdentifier" id="eo7-oN-Yf8" customClass="FlickrCell" customModule="Virtual_Tourist" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="154" height="154"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" insetsLayoutMarginsFromSafeArea="NO" id="bLq-7q-iAX">
+                                            <rect key="frame" x="0.0" y="0.0" width="154" height="154"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="dFF-Vf-EBq">
+                                                    <rect key="frame" x="67" y="67" width="20" height="20"/>
+                                                </activityIndicatorView>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cellLoading" translatesAutoresizingMaskIntoConstraints="NO" id="LpW-Qe-Z9Q">
+                                                    <rect key="frame" x="0.0" y="0.0" width="154" height="154"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="LpW-Qe-Z9Q" secondAttribute="trailing" id="R24-zi-JUe"/>
+                                                <constraint firstItem="dFF-Vf-EBq" firstAttribute="centerX" secondItem="bLq-7q-iAX" secondAttribute="centerX" id="WQp-Iz-DJL"/>
+                                                <constraint firstItem="LpW-Qe-Z9Q" firstAttribute="leading" secondItem="bLq-7q-iAX" secondAttribute="leading" id="Xef-e5-b2I"/>
+                                                <constraint firstItem="LpW-Qe-Z9Q" firstAttribute="top" secondItem="bLq-7q-iAX" secondAttribute="top" id="gSe-iC-Rbj"/>
+                                                <constraint firstAttribute="bottom" secondItem="LpW-Qe-Z9Q" secondAttribute="bottom" id="iQl-FX-7Jl"/>
+                                                <constraint firstItem="dFF-Vf-EBq" firstAttribute="centerY" secondItem="bLq-7q-iAX" secondAttribute="centerY" id="qXb-nK-xEE"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="154" height="154"/>
+                                        <connections>
+                                            <outlet property="activityIndicatorView" destination="dFF-Vf-EBq" id="CY5-Pt-bqJ"/>
+                                            <outlet property="imageView" destination="LpW-Qe-Z9Q" id="WRg-8f-H7X"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="XRz-Xa-gqr" id="bU1-N8-Rro"/>
+                                    <outlet property="delegate" destination="XRz-Xa-gqr" id="mnF-qH-wdn"/>
+                                </connections>
+                            </collectionView>
+                            <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="plB-iR-eBl">
+                                <rect key="frame" x="0.0" y="768" width="414" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="I9m-Xf-aMD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal" title="New Collection"/>
+                                <connections>
+                                    <action selector="editCollectionButtonPressed:" destination="XRz-Xa-gqr" eventType="touchUpInside" id="yaK-zM-emE"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="plB-iR-eBl" firstAttribute="top" secondItem="o7e-2A-boA" secondAttribute="bottom" id="2WW-ud-vZh"/>
+                            <constraint firstItem="plB-iR-eBl" firstAttribute="leading" secondItem="Ncb-kg-XbZ" secondAttribute="leading" id="4xa-4C-Cew"/>
+                            <constraint firstItem="o7e-2A-boA" firstAttribute="top" secondItem="yZq-k6-bvV" secondAttribute="bottom" id="Fwg-EV-yRm"/>
+                            <constraint firstItem="yZq-k6-bvV" firstAttribute="trailing" secondItem="Ncb-kg-XbZ" secondAttribute="trailing" id="IvY-bH-f3w"/>
+                            <constraint firstItem="o7e-2A-boA" firstAttribute="trailing" secondItem="Ncb-kg-XbZ" secondAttribute="trailing" id="VdF-98-nIM"/>
+                            <constraint firstItem="yZq-k6-bvV" firstAttribute="top" secondItem="Ncb-kg-XbZ" secondAttribute="top" id="diE-3M-1Ea"/>
+                            <constraint firstItem="plB-iR-eBl" firstAttribute="trailing" secondItem="Ncb-kg-XbZ" secondAttribute="trailing" id="evS-t1-c61"/>
+                            <constraint firstItem="plB-iR-eBl" firstAttribute="bottom" secondItem="Ncb-kg-XbZ" secondAttribute="bottom" id="i5E-bY-LTl"/>
+                            <constraint firstItem="yZq-k6-bvV" firstAttribute="leading" secondItem="Ncb-kg-XbZ" secondAttribute="leading" id="mlQ-oc-lI0"/>
+                            <constraint firstItem="o7e-2A-boA" firstAttribute="leading" secondItem="Ncb-kg-XbZ" secondAttribute="leading" id="nTP-v4-kv0"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Ncb-kg-XbZ"/>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="o7e-2A-boA" id="vPZ-Dp-ORa"/>
+                        <outlet property="editCollectionButton" destination="plB-iR-eBl" id="dGt-xf-qmG"/>
+                        <outlet property="mapView" destination="yZq-k6-bvV" id="cmv-Bj-vzG"/>
+                        <outlet property="noImagesLabel" destination="nRD-NW-KER" id="JhD-VL-hUI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MOd-xK-Tdy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2080" y="138"/>
+            <point key="canvasLocation" x="2079.7101449275365" y="137.94642857142856"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="V2w-Np-IJq">
@@ -105,4 +195,7 @@
             <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cellLoading" width="180" height="180"/>
+    </resources>
 </document>
