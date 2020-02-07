@@ -26,8 +26,8 @@ class MapViewController: UIViewController {
     let defaults = UserDefaults.standard
     var isAddingPins = true
 
-    var init_latitude: CLLocationDegrees = 28.419529
-    var init_longitude: CLLocationDegrees = -81.581197
+    var init_latitude: CLLocationDegrees = 0.0
+    var init_longitude: CLLocationDegrees = 0.0
     var init_latitude_span: CLLocationDistance = 0.05
     var init_longitude_span: CLLocationDistance = 0.08
     
@@ -51,39 +51,21 @@ class MapViewController: UIViewController {
         centerMap()
         setupGestures()
         fetchPins()
-        
-        /*
-        if longPressGestureRecognizer.state == .began {
-            print("long press gesture state is began")
-        } else if longPressGestureRecognizer.state == .changed {
-            print("long press gesture state is changed")
-        } else if longPressGestureRecognizer.state == .failed {
-           print("long press gesture state is failed")
-        } else if longPressGestureRecognizer.state == .ended {
-            print("long press gesture state is ended")
-        } else if tapGestureRecognizer.state == .began {
-            print("tap gesture state is began")
-        } else if tapGestureRecognizer.state == .changed {
-            print("tap gesture state is changed")
-        } else if tapGestureRecognizer.state == .failed {
-            print("tap gesture state is failed")
-        } else if tapGestureRecognizer.state == .ended {
-            print("tap gesture state is ended")
-        } else {
-            print("something else")
-        }*/
     }
     
-    func viewWillDisappear() {
-        
-    }
-        
     //MARK: - Methods
     func centerMap() {
-        init_latitude = defaults.double(forKey: "initLat")
-        init_longitude = defaults.double(forKey: "initLon")
-        init_latitude_span = defaults.double(forKey: "initLatSpan")
-        init_longitude_span = defaults.double(forKey: "initLonSpan")
+        if defaults.double(forKey: "initLat") == 0.0 {
+            init_latitude = 28.374656
+            init_longitude = -81.549415
+            init_latitude_span = 0.05
+            init_longitude_span = 0.08
+        } else {
+            init_latitude = defaults.double(forKey: "initLat")
+            init_longitude = defaults.double(forKey: "initLon")
+            init_latitude_span = defaults.double(forKey: "initLatSpan")
+            init_longitude_span = defaults.double(forKey: "initLonSpan")
+        }
         
         let center: CLLocationCoordinate2D = CLLocationCoordinate2DMake(init_latitude, init_longitude)
         mapView.setCenter(center, animated: false)
@@ -142,12 +124,11 @@ class MapViewController: UIViewController {
     func addPinSearchData(latitude: Double, longitude: Double) {
         let endpoint = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(FlickrClient.apiKey)&lat=\(latitude)&lon=\(longitude)&format=json&nojsoncallback=1"
         let url = URL(string: endpoint)!
-        var totalPhotos: String = ""
+        //var totalPhotos: String = ""
         
         let task = URLSession.shared.dataTask(with: url) {
             data, response, error in
             guard let data = data else { return }
-            //print(data)
             
             let decoder = JSONDecoder()
             
@@ -155,13 +136,11 @@ class MapViewController: UIViewController {
                 //print(searchData)
                 self.flickrPhotos = searchData
                 //print(self.flickrPhotos)
-                totalPhotos = (self.flickrPhotos?.photos.total)!
-                print("total photos is \(totalPhotos)")
-                
+                //let totalPhotos = (self.flickrPhotos?.photos.total)!
+                //print("total photos is \(totalPhotos)")
             }
-            
         }
-        print("total photos for pin is \(totalPhotos)")
+        
         let pin = Pin(context: dataController.viewContext)
         //pin.totalPhotos = totalPhotos
         try? dataController.viewContext.save()
