@@ -6,7 +6,7 @@ The Virtual Tourist app downloads and stores images from Flickr. The app allows 
 
 ### Usage
 
-The Flickr API in the FlickrClient.swift file must be updated for functionality. You can request one from Flickr, or generate one by suppling ample search criteria and parsing it from return URL generated during a test search here: https://www.flickr.com/services/api/explore/flickr.photos.search
+The Flickr API in the FlickrClient.swift file must be updated for functionality. You can request one from Flickr, or generate one by suppling sufficient search criteria (lat, lon, radius) and parsing it from return URL generated during a test search here: https://www.flickr.com/services/api/explore/flickr.photos.search
 
 ### Images
 
