@@ -75,7 +75,6 @@ class FlickrViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     func flickrGeoSearchRedux(lat: Double, lon: Double, randomNumberPage: Int) {
-        print("flickrGeoSearchRedux")
         editCollectionButton.isEnabled = false
         
         let endpoint = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(FlickrClient.apiKey)&min_upload_date=2017-01-01+00%3A00%3A00&lat=\(lat)&lon=\(lon)&radius=0.5&per_page=\(perPage)&page=\(randomNumberPage)&format=json&nojsoncallback=1"
@@ -125,14 +124,7 @@ class FlickrViewController: UIViewController, UICollectionViewDataSource, UIColl
         pin.firstSearch = false
         editCollectionButton.isEnabled = true
     }
-    
-    /*
-    func getAvailableCellCount() -> Int {
-        let number = 21 - photos.count
-        print("available cells is \(number)")
-        return 21 - photos.count
-    }*/
-    
+        
     func setupCollectionLayout() {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
@@ -154,75 +146,7 @@ class FlickrViewController: UIViewController, UICollectionViewDataSource, UIColl
         }
         
     }
-    
-    /*
-    func deleteAllPhotos() {
-        //disable button while function is running
-        /*
-        guard let photos = pin.photos else { return }
-        print("delete all photos sees \(pin.photos!.count) photos")
         
-        if let photos = fetchedResultsController.fetchedObjects {
-            for photo in photos {
-                guard let objectData = photo as? NSManagedObject else { continue }
-                print("deleteAndSave running")
-                fetchedResultsController.managedObjectContext.delete(objectData)
-            
-                /*guard fetchedResultsController.managedObjectContext.hasChanges else {
-                    print("deleteAndSave found no changes")
-                    return
-                    
-                }*/
-                do {
-                    try fetchedResultsController.managedObjectContext.save()
-                    
-                    DispatchQueue.main.async {
-                        self.collectionView.reloadData()
-                    }
-                    
-                    
-                } catch {
-                    //print("The fetch could not be performed: \(error.localizedDescription)")
-                    showAlert(title: "Data did not save", message: "Please try again")
-                }
-            }
-            
-            
-            
-        }
-        //flickrGeoSearchRedux(lat: pin.latitude, lon: pin.longitude, randomNumberPage: getRandomNumberPage())
-        fetchMorePhotos()*/
-        selectedPhotosArray = []
-        let index = photos.count - 1
-        for i in 0...index {
-            selectedPhotosArray.append(i)
-        }
-        
-        if let selectedCells = collectionView.indexPathsForSelectedItems {
-            let items = selectedPhotosArray.sorted { $0 > $1 }
-            for item in items {
-                let indexPath = photos[item]
-                fetchedResultsController.managedObjectContext.delete(indexPath)
-            }
-            do {
-                try fetchedResultsController.managedObjectContext.save()
-                   
-                } catch {
-                    //print("The fetch could not be performed: \(error.localizedDescription)")
-                    showAlert(title: "Data did not save", message: "Please try again")
-                }
-                
-        }
-        
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
-        
-        selectedPhotosArray = []
-        fetchMorePhotos()
-        
-    }*/
-    
     func deletePhoto() {
         //get indexPath
         //get managed object from data model
@@ -241,15 +165,10 @@ class FlickrViewController: UIViewController, UICollectionViewDataSource, UIColl
                        self.collectionView.reloadData()
                    }
                 } catch {
-                    //print("The fetch could not be performed: \(error.localizedDescription)")
                     showAlert(title: "Data did not save", message: "Please try again")
                 }
                 
         }
-        /*
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }*/
         
         selectedPhotosArray = []
         fetchMorePhotos()
@@ -290,7 +209,6 @@ class FlickrViewController: UIViewController, UICollectionViewDataSource, UIColl
         let totalPhotosString = pin.totalPhotos! //get the total number of photos
         let totalPhotosInt = Int(totalPhotosString)! //convert total into an Int, currently defaults to 21 in the Pin Entity in core data
         let imagesNeededToFillArray = perPage //determine how many images we want from the search
-        //print("images needed to fill array \(imagesNeededToFillArray)")
         let totalPages = totalPhotosInt / imagesNeededToFillArray //determing the total number of pages available
         
         if pin.firstSearch {
@@ -311,7 +229,6 @@ class FlickrViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
         
     @IBAction func editCollectionButtonPressed(_ sender: Any) {
-        print(selectedPhotosArray.count)
         if selectedPhotosArray.isEmpty {
             selectedPhotosArray = []
             guard photos.count >= 1 else { return }
@@ -326,7 +243,6 @@ class FlickrViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //return photoArray.count
         return photos.count
     }
     

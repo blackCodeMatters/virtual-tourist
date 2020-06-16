@@ -85,7 +85,6 @@ class MapViewController: UIViewController {
         } else {
             navButton.title = "Done"
             self.pinDeleteButtonHeight.constant = 40
-            //change after adding functionality
             pinDeleteButton.isEnabled = false
         }
     }
@@ -124,7 +123,6 @@ class MapViewController: UIViewController {
     func addPinSearchData(latitude: Double, longitude: Double) {
         let endpoint = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(FlickrClient.apiKey)&lat=\(latitude)&lon=\(longitude)&format=json&nojsoncallback=1"
         let url = URL(string: endpoint)!
-        //var totalPhotos: String = ""
         
         let task = URLSession.shared.dataTask(with: url) {
             data, response, error in
@@ -133,16 +131,11 @@ class MapViewController: UIViewController {
             let decoder = JSONDecoder()
             
             if let searchData = try? decoder.decode(FlickrPhotos.self, from: data) {
-                //print(searchData)
                 self.flickrPhotos = searchData
-                //print(self.flickrPhotos)
-                //let totalPhotos = (self.flickrPhotos?.photos.total)!
-                //print("total photos is \(totalPhotos)")
             }
         }
         
         let pin = Pin(context: dataController.viewContext)
-        //pin.totalPhotos = totalPhotos
         try? dataController.viewContext.save()
     }
     
@@ -165,17 +158,8 @@ class MapViewController: UIViewController {
         }
     }
     
-    //MARK: - Move this into Map Delegate?
-  /*  @objc private func recognizeTapPress(_ sender: UITapGestureRecognizer) {
-        // Do not generate pins many times during long press.
-        if sender.state != UIGestureRecognizer.State.began {
-            return
-        }
-    }*/
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let viewController = segue.destination as? FlickrViewController else { return }
-        //viewController.pinId = selectedPin!.pinId //appears not necessary
         viewController.pin = selectedPin
         viewController.dataController = dataController
     }
@@ -215,7 +199,6 @@ extension MapViewController: MKMapViewDelegate {
                 } else {
                     dataController.viewContext.delete(selectedPin)
                     try? dataController.viewContext.save()
-                    //need to add error handling above
                     fetchPins()
                 }
             }

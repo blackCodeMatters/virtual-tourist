@@ -18,14 +18,9 @@ class DataController {
         return persistentContainer.viewContext
     }
     
-    //dont think i'm going to use this
-    //var backgroundContext:NSManagedObjectContext!
-    
     //initializer to configure persistent container
     init(modelName: String) {
         persistentContainer = NSPersistentContainer(name: modelName)
-        
-        //backgroundContext = persistentContainer.newBackgroundContext()
     }
     
     //load persistent store
