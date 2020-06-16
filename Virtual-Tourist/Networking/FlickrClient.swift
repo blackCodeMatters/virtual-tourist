@@ -19,7 +19,7 @@ class FlickrClient {
         static var pages = 1
     }
     
-    static let apiKey = "e589ec9492a8809e36ccac1731758872"
+    static let apiKey = "d43b31fa3e38275545ccd38a2250edb5" //temp key from : https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=d43b31fa3e38275545ccd38a2250edb5&lat=24.555263&lon=-81.8041&radius=5&per_page=&page=&format=rest&api_sig=2c7bf738cb2f53fcab7e11eb2db581a7
     static var latitude = "0.00"
     static var longitude = "0.00"
     
